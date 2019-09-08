@@ -233,17 +233,21 @@ public class WordReporter {
                 return;
             }
             matcher = this.matcher(wholeText);
-            if (matcher.find()) {
+            StringBuffer result = new StringBuffer();
+            while (matcher.find()) {
                 boolean isPic = false;
                 int width = 0;
                 int height = 0;
                 int picType = 0;
                 String path = null;
-                String keyText = matcher.group().substring(2,matcher.group().length()-1);
+                /*String keyText = matcher.group().substring(2,matcher.group().length()-1);*/
+                String keyText = matcher.group(1);
                 Object value = params.get(keyText);
                 String newRunText = "";
                 if(value instanceof String){
-                    newRunText = matcher.replaceFirst(String.valueOf(value));
+                    // newRunText = matcher.replaceFirst(String.valueOf(value));
+                    matcher.appendReplacement(result, String.valueOf(value));
+                    newRunText = result.toString();
                 }else if(value instanceof Map){//插入图片
                     isPic = true;
                     Map pic = (Map)value;
