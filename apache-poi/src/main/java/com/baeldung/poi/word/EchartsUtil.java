@@ -15,9 +15,13 @@ import sun.misc.BASE64Decoder;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by shucheng on 2019-9-12 下午 16:07
@@ -101,5 +105,16 @@ public class EchartsUtil {
             e.printStackTrace();
         }
         return new ByteArrayInputStream(bytes);
+    }
+
+    // 将文件转换为String，如果有换行符，直接忽略掉
+    // 可参看WordDocument中的convertTextFileToString
+    public static String convertFileToString(String filePath) {
+        try (Stream<String> lines = Files.lines(Paths.get(ClassLoader.getSystemResource(filePath).toURI()))) {
+            return lines.collect(Collectors.joining());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

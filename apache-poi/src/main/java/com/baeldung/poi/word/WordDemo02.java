@@ -64,8 +64,7 @@ public class WordDemo02 {
      * @return
      */
     public static InputStream getImageInputStream(String imageDataPath) throws Exception {
-        Stream<String> lines = Files.lines(Paths.get(ClassLoader.getSystemResource(imageDataPath).toURI()));
-        String imageDataStr = lines.collect(Collectors.joining());
+        String imageDataStr = EchartsUtil.convertFileToString(imageDataPath);
         // https://blog.csdn.net/tjj3027/article/details/80421170
         String[] arr = imageDataStr.split("base64,");
         return EchartsUtil.base64ToInputStream(arr[1]);
