@@ -73,6 +73,7 @@ public class EchartsUtil {
 
     /**
      * 将图片写入文件（这种方法比ImageIO写入文件的文件大小更大，原因未知，有待探索）
+     * https://www.cnblogs.com/zhangshitong/p/4980498.html
      * 调用方法：
      * writeImageToFile(intputStream, "aaa.png");
      * @param inputStream 图片文件输入流
