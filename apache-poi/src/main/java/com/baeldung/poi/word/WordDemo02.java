@@ -5,10 +5,7 @@ import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-import sun.misc.BASE64Decoder;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -41,51 +38,6 @@ public class WordDemo02 {
         document.close();
     }
 
-    /** 将图片写入文件
-     * 调用方法：
-     * writeImageToFile(inputStream, "png", new File("aaa.png"));
-     * @param inputStream 图片文件输入流
-     * @param imageFormat 图片格式
-     * @param outputFile 输出文件
-     * @throws Exception
-     */
-    public static void writeImageToFile(InputStream inputStream, String imageFormat, File outputFile) throws Exception {
-        BufferedImage bi = ImageIO.read(inputStream);
-        ImageIO.write(bi, imageFormat, outputFile);
-        inputStream.close();
-    }
-
-    /**
-     * 将图片写入文件（这种方法比ImageIO写入文件的文件大小更大，原因未知，有待探索）
-     * 调用方法：
-     * writeImageToFile(intputStream, "aaa.png");
-     * @param inputStream 图片文件输入流
-     * @param filePath 图片输出路径（可以是绝对路径；也可以是相对路径，如：aaa.png）
-     * @throws Exception
-     */
-    public static void writeImageToFile(InputStream inputStream, String filePath) throws Exception {
-        FileOutputStream fos = new FileOutputStream(filePath);
-        byte[] b = new byte[1024];
-        int length;
-        while ((length = inputStream.read(b)) > 0) {
-            fos.write(b, 0, length);
-        }
-        inputStream.close();
-        fos.close();
-    }
-
-    // 将base64转换为InputStream（https://blog.csdn.net/weixin_40467684/article/details/91872973）
-    public static InputStream base64ToInputStream(String base64) {
-        BASE64Decoder decoder = new BASE64Decoder();
-        byte[] bytes = new byte[1024];
-        try {
-            bytes = decoder.decodeBuffer(base64);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new ByteArrayInputStream(bytes);
-    }
-
     // 测试将图片写到文件中
     public static void main(String[] args) throws Exception {
         InputStream inputStream = getImageInputStream(imageDataPath);
@@ -116,6 +68,6 @@ public class WordDemo02 {
         String imageDataStr = lines.collect(Collectors.joining());
         // https://blog.csdn.net/tjj3027/article/details/80421170
         String[] arr = imageDataStr.split("base64,");
-        return base64ToInputStream(arr[1]);
+        return EchartsUtil.base64ToInputStream(arr[1]);
     }
 }

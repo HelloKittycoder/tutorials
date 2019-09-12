@@ -19,7 +19,7 @@ public class WordDemo02Test {
     @Test
     public void testWriteImageToFile() throws Exception {
         InputStream inputStream = WordDemo02.getImageInputStream(wordDemo02.imageDataPath);
-        WordDemo02.writeImageToFile(inputStream, "aaa.png");
-        // WordDemo02.writeImageToFile(inputStream, "png", new File("aaa.png"));
+        EchartsUtil.writeImageToFile(inputStream, "aaa.png");
+        // EchartsUtil.writeImageToFile(inputStream, "png", new File("aaa.png"));
     }
 }
