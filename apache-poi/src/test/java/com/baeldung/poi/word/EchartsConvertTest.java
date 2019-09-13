@@ -47,7 +47,7 @@ public class EchartsConvertTest {
     @Test
     public void testFromTextFile() {
         // 不必要的空格最好删除，字符串请求过程中会将空格转码成+号
-        String optJson = EchartsUtil.convertFileToString("optionData.txt");
+        String optJson = EchartsUtil.convertFileToString("echarts/optionData.txt");
         optJson = optJson.replaceAll("\\s", "");
         
         Map<String, String> params = new HashMap<>();
@@ -89,7 +89,7 @@ public class EchartsConvertTest {
         int[] seriesData = new int[]{5, 20, 36, 10, 10, 20};
         map.put("seriesData", JSON.toJSONString(seriesData));
         try {
-            option = generateStringFromFtl("option.ftl", map);
+            option = generateStringFromFtl("echarts/option.ftl", map);
         } catch (Exception e) {
             e.printStackTrace();
         }

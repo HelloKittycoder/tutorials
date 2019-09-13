@@ -7,10 +7,6 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by shucheng on 2019-9-12 下午 15:35
@@ -19,7 +15,7 @@ import java.util.stream.Stream;
 public class WordDemo02 {
 
     public static String imageOutput = "imageTest.docx";
-    public static String imageDataPath = "echartsimage.txt";
+    public static String imageDataPath = "echarts/echartsimage.txt";
 
     // 生成图片（这里拿echarts中得到的base64数据来生成img，base64数据存放在echartsimage.txt中）
     public void handleImage() throws Exception {
