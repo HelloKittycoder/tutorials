@@ -1,5 +1,7 @@
 package com.baeldung.poi.word;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
@@ -116,5 +118,23 @@ public class EchartsUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    // 根据ftl模板生成字符串
+    // 参考链接：https://blog.csdn.net/weixin_38429587/article/details/89477373
+    // https://blog.csdn.net/u010999809/article/details/100784476
+    public static String generateStringFromFtl(String templatePath, Map<String, Object> map) throws Exception {
+        // 设置Configuration
+        Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
+        configuration.setDefaultEncoding("UTF-8");
+        // 根据classloader加载模板文件
+        configuration.setClassLoaderForTemplateLoading(ClassLoader.getSystemClassLoader(), "/");
+
+        // 生成模板对象
+        Template template = configuration.getTemplate(templatePath);
+        StringWriter stringWriter = new StringWriter();
+
+        template.process(map, stringWriter);
+        return stringWriter.getBuffer().toString();
     }
 }
